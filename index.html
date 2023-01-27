@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Vue Test</title>
+        <style>
+            body {
+                color: white;
+                background-color: #141414;
+            }
+
+            .box {
+                background-color: #A0A0A0;
+                width: 400px;
+                height: 200px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin: 12px;
+            }
+
+            .someclass {
+                color: green;
+            }
+        </style>
+        <script src="https://unpkg.com/vue@next"></script>
+    </head>
+    <body>
+        <h1>Testing Vue</h1>
+        <div id="app">
+            <h2>This is the new template</h2>
+            <h2>Message: {{message}}</h2>
+            <h1>Mouse Events</h1>
+            <button @click="updateMessage();">Click me</button>
+            <!-- v-if and v-else add and remove things from the DOM. v-show uses CSS to hide (which is usually better) -->
+            <h2 v-if="click_count >= 10">You've unlocked the secret message!</h2>
+            <h2 v-else>You should click the button</h2>
+            <h2 v-show="click_count == 0">You haven't clicked the button yet</h2> <!-- could be v-if because it will only show once anyways -->
+            <h2>Last mouse event: {{mouse_event}}</h2>
+            <div class="box" @mouseover="updateMouseEvent($event, 'Hello')">Mouse Enter</div>
+            <div class="box" @mouseleave="updateMouseEvent">Mouse Leave</div>
+            <div class="box" @dblclick="updateMouseEvent">Mouse Double Click</div>
+            <div class="box" @mousemove="updateMouseEvent($event, 'Moved')">Mouse Position: {{mouse_pos.x}} {{mouse_pos.y}}</div>
+            <h1>For loop</h1>
+            <div>
+                <ul>
+                    <li v-for="user in users">User: {{user}}</li>
+                </ul>
+            </div>
+            <h1>Data/Attribute Binding</h1>
+            <a href="{{url}}">This URL is not bound, so it will not work</a>
+            <br/>
+            <a :href="url">This URL is bound, it will work</a>
+            <h1>Dynamic Classes</h1>
+            <div>
+                <ul>
+                    <li v-for="user in users" :class="{ someclass: user.length == 5 }">User: {{user}}</li>
+                </ul>
+            </div>
+            <h1>Computed Properties</h1>
+            <div>
+                <h2>Users with a name of length 5: {{filteredUsers}}</h2>
+            </div>
+        </div>
+    </body>
+    <script src="app.js"></script>
+</html>
